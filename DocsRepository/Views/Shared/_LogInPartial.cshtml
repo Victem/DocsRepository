@@ -1,0 +1,31 @@
+﻿@if (User.Identity.IsAuthenticated)
+{
+    using (@Html.BeginForm("LogOut", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right navbar-form" }))
+    {
+        <div class="form-group">
+            <span style="color:#999; padding-right:10px;"><span class="fa fa-user"></span> @User.Identity.Name</span>
+        </div>
+        <button type="submit" class="btn btn-danger">Выход <span class="glyphicon glyphicon-log-out"></span></button>
+    }
+}
+else
+{
+    <div class="navbar-form navbar-right" role="search">
+        
+        <a class="btn btn-success" href="~/Account/LogIn">Вход <span class="glyphicon glyphicon-log-in"></span></a>
+        <a class="btn btn-warning" href="~/Account/Register">Регистрация <span class="glyphicon glyphicon-pencil"></span></a>
+    </div>
+}
+@*@Html.Raw(@Html.ActionLink("logo", "Action", "Controller").ToHtmlString().Replace("logo", "<img src=\"/Content/Images/log2.png\" />"))*@
+@*@using (@Html.BeginForm("LogOut", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right navbar-form" }))
+    {
+        <div class="form-group">
+            <span style="color:#999; padding-right:10px;">Приветствую, Юзер!    </span>
+        </div>
+        <button type="submit" class="btn btn-danger">Выход <span class="glyphicon glyphicon-log-out"></span></button>
+    }
+
+<div class="navbar-form navbar-right" role="search">
+    <a class="btn btn-success" href="~/Account/LogIn">Вход <span class="glyphicon glyphicon-log-in"></span></a>
+    <a class="btn btn-warning" href="~/Account/Register">Регистрация <span class="glyphicon glyphicon-pencil"></span></a>
+</div>*@

@@ -1,0 +1,68 @@
+﻿
+
+@model DocsRepository.Models.DocumentsListViewModel
+
+
+
+<div id="docsList">
+    <p>Загружено @Model.CurrentRecordCount из @Model.TotalRecordsCount</p>
+    
+    <div class="wrapper">
+        @foreach (var doc in Model.Documents)
+        {
+
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">@doc.Name</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <i class="fa fa-file-word-o fa-5x"></i>
+                            </div>
+                            <div class="col-md-9">
+                                <div>
+                                    <i class="fa fa-user"></i> <a class="mark" data-dr-author="@doc.Author" href="#">@doc.Author</a>
+                                </div>
+                                <div class="">
+                                    <h5>
+                                        <i class="fa fa-calendar"></i> <small>
+                                            <em data-dr-date-year="@doc.CreationDate.Year"
+                                                data-dr-date-month="@doc.CreationDate.Month"
+                                                data-dr-date-day="@doc.CreationDate.Day"
+                                                data-dr-date-="@doc.CreationDate.ToString("yyyy.MM.dd")">@doc.CreationDate.ToString("dd.MM.yyyy")</em>
+                                            </small>
+                                        </h5>
+                                    </div>
+                                    <div>
+                                        @if (doc.GetTags() != null)
+                                        {
+                                            foreach (var tag in doc.GetTags())
+                                            {
+                                                <span class="label label-primary">@tag</span>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                                @*<div class="col-md-4">
+
+                                </div>*@
+                                <div class="col-md-1">
+                                    @*<button class="btn btn-warning" data-dr-opendoc="">
+                                        <i class="fa fa-download fa-lg" style="color:#000"></i>
+                                    </button>*@
+                                    <a href="@Url.Action("GetFile","Documents", new {doc.Id})" class="btn btn-warning">
+                                        <i class="fa fa-download fa-lg" style="color:#000"></i>
+
+                                    </a>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        }
+    </div>
+@Scripts.Render("~/Scripts/FileOpenScript.js")
+</div>

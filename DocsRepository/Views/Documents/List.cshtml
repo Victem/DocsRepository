@@ -1,0 +1,72 @@
+﻿@*@model IEnumerable<DocsRepositoryData.Entities.Document>*@
+
+@model DocsRepository.Models.DocumentsListViewModel
+@{
+    ViewBag.Title = "Документы";
+    Layout = "~/Views/Shared/_Layout.cshtml";        
+}
+<h2>Документы</h2>
+<div class="container">
+   <div class="row">
+       <form action="@Url.Action("List")" method="get" class="navbar-form navbar-left" data-dr-ajax="true" data-dr-target="#docsList">
+           <div class="input-group">
+               <input id="searchField" type="search" autocomplete="off" name="searchTerm" class="form-control" placeholder="Искать документ..." data-dr-autocomplete="@Url.Action("AutocompleteName")">               
+               <span class="input-group-btn">
+                   <button type="submit" class="btn btn-default"><i class="fa fa-search"></i> Найти</button>                   
+               </span>               
+           </div>           
+       </form>       
+       <form action="@Url.Action("List")" method="get" class="navbar-form navbar-left" data-dr-ajax="true" data-dr-target="#docsList">
+           <div class="input-group">
+               @*<input type="text" name="tags" placeholder="Tags" />*@
+               <ul class="form-control" data-dr-contol="tagit" data-dr-autocomplete="" data-dr-available-tags="@Url.Action("AvailableTags")"></ul>
+               <span class="input-group-btn">
+                   <button type="submit" class="btn btn-default"><i class="fa fa-search"></i> Найти</button>
+               </span>
+           </div>
+       </form>
+       <form action="@Url.Action("List")" method="get" class="navbar-form navbar-left" data-dr-ajax="true" data-dr-target="#docsList">
+           @*<div class="form-group">*@
+               <div class="btn-toolbar" role="toolbar" aria-label="...">
+                   <div class="btn-group" role="group" aria-label="...">
+                       <button type="button" class="btn btn-default" data-dr-control="sort-button" data-dr-sort-type="compareDocsAuthorAsc"><i class="fa fa-user"></i><i class="fa fa-sort-alpha-asc"></i></button>
+                       <button type="button" class="btn btn-default" data-dr-control="sort-button" data-dr-sort-type="compareDocsAuthorDesc"><i class="fa fa-user"></i><i class="fa fa-sort-alpha-desc"></i></button>
+
+                       <button type="button" class="btn btn-default" data-dr-control="sort-button" data-dr-sort-type="compareDocsNameAsc"><i class="fa fa-file-word-o"></i><i class="fa fa-sort-alpha-asc"></i></button>
+                       <button type="button" class="btn btn-default" data-dr-control="sort-button" data-dr-sort-type="compareDocsNameDesc"><i class="fa fa-file-word-o"></i><i class="fa fa-sort-alpha-desc"></i></button>
+
+                       <button type="button" class="btn btn-default" data-dr-control="sort-button" data-dr-sort-type="compareDocsDatesAsc"><i class="fa fa-calendar"></i><i class="fa fa-sort-numeric-asc"></i></button>
+                       <button type="button" class="btn btn-default" data-dr-control="sort-button" data-dr-sort-type="compareDocsDatesDesc"><i class="fa fa-calendar"></i><i class="fa fa-sort-numeric-desc"></i></button>
+                       
+                      
+                   </div>
+               @*</div>*@
+           </div>
+       </form>
+       <div class="navbar-form navbar-left">
+           <div class="btn-toolbar" role="toolbar" aria-label="...">
+               <div class="btn-group" role="group" aria-label="...">                   
+                   <a class="btn btn-success" href="~/Documents/Add">
+                       <i class="fa fa-plus" style="color:#000"></i>
+                       <i class="fa fa-file-word-o fa-lg" style="color:#000"></i>
+                   </a>
+               </div>
+           </div>
+       </div>
+   </div>
+</div>
+
+
+
+
+
+@if (Model.CurrentRecordCount!=0)
+{
+    @Html.Partial("_DocumentsList", Model)
+}
+else
+{
+    <div>
+        <h2>Нет данных</h2>
+    </div>
+}
